@@ -1,7 +1,9 @@
 package pro.sky.homeworks.homework28.services;
+
 import pro.sky.homeworks.homework28.Employee;
 
-import java.util.Collection;
+import java.util.List;
+import java.util.Optional;
 
 public interface DepartmentService {
 
@@ -19,11 +21,11 @@ public interface DepartmentService {
 
     double averageSalary();
 
-    Employee haveMaxSalaryInDept(int departmnetId);
+    Optional<Employee> haveMaxSalaryInDept(int departmentId);
 
-    Employee haveMinSalaryInDept(int departmnetId);
+    Optional<Employee> haveMinSalaryInDept(int departmentId);
 
-    Collection<Employee> getAllByDept(int departmnetId);
+    List<Employee> getAllByDept(int departmentId);
 
-    Collection<Employee> getAll();
+    List<Employee> getAll();
 }

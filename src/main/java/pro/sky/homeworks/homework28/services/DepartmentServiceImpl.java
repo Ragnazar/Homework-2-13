@@ -85,46 +85,32 @@ public class DepartmentServiceImpl implements DepartmentService {
     }
 
     @Override
-    public Employee haveMaxSalaryInDept(int departmentId) {
-        double maxSalary = Double.MIN_VALUE;
-        String key = null;
-        for (Map.Entry<String, Employee> entry : employees.entrySet()) {
-            if (entry.getValue().getDepartment() == departmentId && maxSalary < entry.getValue().getSalary()) {
-                maxSalary = entry.getValue().getSalary();
-                key = entry.getKey();
-            }
-        }
-        return employees.get(key);
+    public Optional<Employee> haveMaxSalaryInDept(int departmentId) {
+        List<Employee> filter = getAllByDept(departmentId);
+        filter.sort(Comparator.comparingDouble(Employee::getSalary).reversed());
+        return filter.stream().findFirst();
+    }
+
+
+    @Override
+    public Optional<Employee> haveMinSalaryInDept(int departmentId) {
+        List<Employee> filter = getAllByDept(departmentId);
+        filter.sort(Comparator.comparingDouble(Employee::getSalary));
+        return filter.stream().findFirst();
     }
 
     @Override
-    public Employee haveMinSalaryInDept(int departmentId) {
-        double minSalary = Double.MAX_VALUE;
-        String key = null;
-        for (Map.Entry<String, Employee> entry : employees.entrySet()) {
-            if (entry.getValue().getDepartment() == departmentId && minSalary > entry.getValue().getSalary()) {
-                minSalary = entry.getValue().getSalary();
-                key = entry.getKey();
-            }
-        }
-        return employees.get(key);
-    }
-
-    @Override
-    public Collection<Employee> getAllByDept(int departmentId) {
+    public List<Employee> getAllByDept(int departmentId) {
         List<Employee> result = new ArrayList<>();
-        String key = null;
-        for (Map.Entry<String, Employee> entry : employees.entrySet()) {
-            if (entry.getValue().getDepartment() == departmentId) {
-                key = entry.getKey();
-            }
-            result.add(employees.get((key)));
-        }
+        employees.entrySet()
+                .stream()
+                .filter(entry -> entry.getValue().getDepartment() == departmentId)
+                .forEach(entry -> result.add(entry.getValue()));
         return result;
     }
 
     @Override
-    public Collection<Employee> getAll() {
+    public List<Employee> getAll() {
         List<Employee> result = new ArrayList<>(employees.values());
         result.sort(Comparator.comparingInt(Employee::getDepartment));
         return result;

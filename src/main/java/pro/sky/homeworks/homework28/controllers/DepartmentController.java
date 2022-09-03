@@ -8,6 +8,7 @@ import pro.sky.homeworks.homework28.Employee;
 import pro.sky.homeworks.homework28.services.DepartmentService;
 
 import java.util.Collection;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/departments")
@@ -18,13 +19,14 @@ public class DepartmentController {
     public DepartmentController(DepartmentService departmentService) {
         this.departmentService = departmentService;
     }
+
     @GetMapping(path = "/max-salary")
-    public Employee addEmployee(@RequestParam("departmentId") int departmnetId) {
+    public Optional<Employee> addEmployee(@RequestParam("departmentId") int departmnetId) {
         return departmentService.haveMaxSalaryInDept(departmnetId);
     }
 
     @GetMapping(path = "/min-salary")
-    public Employee removeEmployee(@RequestParam("departmentId") int departmnetId) {
+    public Optional<Employee> removeEmployee(@RequestParam("departmentId") int departmnetId) {
         return departmentService.haveMinSalaryInDept(departmnetId);
     }
 
