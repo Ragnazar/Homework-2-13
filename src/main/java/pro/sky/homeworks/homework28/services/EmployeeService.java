@@ -1,13 +1,25 @@
 package pro.sky.homeworks.homework28.services;
 
-import java.util.Collection;
+import pro.sky.homeworks.homework28.Employee;
+
+import java.util.Map;
 
 public interface EmployeeService {
-    Employee addEmployee(String firstName, String lastName);
 
-    Employee deleteEmployee(String firstName, String lastName);
+    Employee addEmployee(Employee employee);
 
-    Employee getEmployee(String firstName, String lastName);
+    Employee removeEmployee(Employee employee);
 
-    Collection<Employee> getEmployees();
+
+    Employee changeSalary(Employee employee, double newSalary);
+
+    Employee changeDepartment(Employee employee, int newDepartment);
+
+    double getSum();
+
+
+    double averageSalary();
+
+    Map<String, Employee> getMap();
+
 }

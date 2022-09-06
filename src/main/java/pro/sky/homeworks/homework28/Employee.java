@@ -1,4 +1,4 @@
-package pro.sky.homeworks.homework27;
+package pro.sky.homeworks.homework28;
 
 import java.util.Objects;
 
@@ -6,16 +6,35 @@ public class Employee {
     //Поля
     private final String firstName;
     private final String lastName;
-
+    private int department;
+    private double salary;
 
     //Конструктор
-    public Employee(String firstName, String lastName) {
+    public Employee(String firstName, String lastName, int department, double salary) {
 
         this.firstName = firstName;
         this.lastName = lastName;
+        this.department = department;
+        this.salary = salary;
+    }
+
+    public void setDepartment(int department) {
+        this.department = department;
+    }
+
+    public void setSalary(double salary) {
+        this.salary = salary;
     }
 
     //Геттеры
+    public int getDepartment() {
+        return department;
+    }
+
+    public double getSalary() {
+        return salary;
+    }
+
     public String getFirstName() {
         return firstName;
     }
@@ -27,8 +46,8 @@ public class Employee {
     public String getFullName() {
         return firstName + " " + lastName;
     }
-
     //Остальные методы
+
     @Override
     public String toString() {
         return getFirstName() + " " + getLastName() + " ";

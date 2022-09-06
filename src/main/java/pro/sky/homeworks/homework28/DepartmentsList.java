@@ -1,14 +1,14 @@
-package pro.sky.homeworks.homework27;
+package pro.sky.homeworks.homework28;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class EmployeesList {
+public class DepartmentsList {
 
     public static void main(String[] args) {
 
-        SpringApplication.run(EmployeesList.class, args);
+        SpringApplication.run(DepartmentsList.class, args);
     }
 
 }
