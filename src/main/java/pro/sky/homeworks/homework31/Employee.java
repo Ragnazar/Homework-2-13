@@ -1,4 +1,4 @@
-package pro.sky.homeworks.homework28;
+package pro.sky.homeworks.homework31;
 
 import java.util.Objects;
 

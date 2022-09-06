@@ -1,8 +1,8 @@
-package pro.sky.homeworks.homework28.services;
+package pro.sky.homeworks.homework31.services;
 
 import org.springframework.stereotype.Service;
-import pro.sky.homeworks.homework28.exceptions.EmployeeNotFoundException;
-import pro.sky.homeworks.homework28.Employee;
+import pro.sky.homeworks.homework31.exceptions.EmployeeNotFoundException;
+import pro.sky.homeworks.homework31.Employee;
 
 import java.util.*;
 
@@ -37,22 +37,36 @@ public class EmployeeServiceImpl implements EmployeeService {
         return employees;
     }
 
+    @Override
+    public Employee getEmployee(String firstName, String lastName) {
+        String key = firstName + lastName;
+        if (!employees.containsKey(key)) {
+            throw new EmployeeNotFoundException("Запись отсутствует");
+        }
+        return employees.get(key);
+    }
+
+    @Override
+    public Employee addEmployee(String firstName, String lastName, int departmentId, double salary) {
+        String key = firstName + lastName;
+        Employee employee = new Employee(firstName, lastName, departmentId, salary);
+        employees.put(key, employee);
+        return employee;
+    }
+
     private String getKey(Employee employee) {
         return employee.getLastName() + " " + employee.getFirstName();
     }
 
-    @Override
-    public Employee addEmployee(Employee employee) {
-        employees.put(getKey(employee), employee);
-        return employee;
-    }
 
     @Override
-    public Employee removeEmployee(Employee employee) {
-        if (!employees.containsKey(getKey(employee))) {
+    public Employee removeEmployee(String firstName, String lastName) {
+        String key = firstName + lastName;
+        if (!employees.containsKey(key)) {
             throw new EmployeeNotFoundException("Запись отсутствует");
         }
-        employees.remove(getKey(employee));
+        Employee employee = employees.get(key);
+        employees.remove(key);
         return employee;
     }
 
