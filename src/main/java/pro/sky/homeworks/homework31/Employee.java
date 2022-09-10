@@ -2,6 +2,8 @@ package pro.sky.homeworks.homework31;
 
 import java.util.Objects;
 
+import static org.springframework.util.StringUtils.capitalize;
+
 public class Employee {
     //Поля
     private final String firstName;
@@ -12,8 +14,8 @@ public class Employee {
     //Конструктор
     public Employee(String firstName, String lastName, int department, double salary) {
 
-        this.firstName = firstName;
-        this.lastName = lastName;
+        this.firstName = capitalize(firstName.toLowerCase());
+        this.lastName = capitalize(lastName.toLowerCase());
         this.department = department;
         this.salary = salary;
     }
@@ -43,9 +45,6 @@ public class Employee {
         return lastName;
     }
 
-    public String getFullName() {
-        return firstName + " " + lastName;
-    }
     //Остальные методы
 
     @Override

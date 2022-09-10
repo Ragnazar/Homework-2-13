@@ -1,6 +1,5 @@
 package pro.sky.homeworks.homework31.controllers;
 
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -13,7 +12,9 @@ import pro.sky.homeworks.homework31.services.EmployeeService;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
+
+import static org.apache.commons.lang3.StringUtils.isAlpha;
+import static org.springframework.util.StringUtils.capitalize;
 
 @RestController
 @RequestMapping("/employees")
@@ -31,25 +32,19 @@ public class EmployeeController {
                                 @RequestParam("lastName") String lastName,
                                 @RequestParam("departmentId") int departmentId,
                                 @RequestParam("salary") double salary) throws BadRequestException {
-        if (!Objects.equals(firstName, StringUtils.capitalize(firstName)) || !Objects.equals(lastName, StringUtils.capitalize(lastName))){
-         throw new BadRequestException("Неверный формат запроса");
-        }
+        validateInput(firstName,lastName);
         return employeeService.addEmployee(firstName, lastName, departmentId, salary);
     }
 
     @GetMapping(path = "/remove")
     public Employee removeEmployee(@RequestParam("firstName") String firstName, @RequestParam("lastName") String lastName) throws BadRequestException {
-        if (!Objects.equals(firstName, StringUtils.capitalize(firstName)) || !Objects.equals(lastName, StringUtils.capitalize(lastName))){
-            throw new BadRequestException("Неверный формат запроса");
-        }
+        validateInput(firstName,lastName);
         return employeeService.removeEmployee(firstName, lastName);
     }
 
     @GetMapping(path = "/find")
     public Employee findEmployee(@RequestParam("firstName") String firstName, @RequestParam("lastName") String lastName) throws BadRequestException {
-        if (!Objects.equals(firstName, StringUtils.capitalize(firstName)) || !Objects.equals(lastName, StringUtils.capitalize(lastName))){
-            throw new BadRequestException("Неверный формат запроса");
-        }
+        validateInput(firstName,lastName);
         return employeeService.getEmployee(firstName,lastName);
     }
 
@@ -57,4 +52,12 @@ public class EmployeeController {
     public Map<Integer, List<Employee>> getEmployees() {
         return departmentService.getAll();
     }
+
+    private void validateInput(String firstName, String lastName) throws BadRequestException {
+        if (!(isAlpha(firstName) && isAlpha(lastName))
+                || (!firstName.equals(capitalize(firstName)) && !lastName.equals(capitalize(lastName)))){
+            throw new BadRequestException("Неверный формат запроса");
+        }
+    }
+
 }
