@@ -31,7 +31,7 @@ public class EmployeeController {
                                 @RequestParam("lastName") String lastName,
                                 @RequestParam("departmentId") int departmentId,
                                 @RequestParam("salary") double salary) throws BadRequestException {
-        if (!Objects.equals(firstName, StringUtils.capitalize(firstName)) && !Objects.equals(lastName, StringUtils.capitalize(lastName))){
+        if (!Objects.equals(firstName, StringUtils.capitalize(firstName)) || !Objects.equals(lastName, StringUtils.capitalize(lastName))){
          throw new BadRequestException("Неверный формат запроса");
         }
         return employeeService.addEmployee(firstName, lastName, departmentId, salary);
@@ -39,7 +39,7 @@ public class EmployeeController {
 
     @GetMapping(path = "/remove")
     public Employee removeEmployee(@RequestParam("firstName") String firstName, @RequestParam("lastName") String lastName) throws BadRequestException {
-        if (!Objects.equals(firstName, StringUtils.capitalize(firstName)) && !Objects.equals(lastName, StringUtils.capitalize(lastName))){
+        if (!Objects.equals(firstName, StringUtils.capitalize(firstName)) || !Objects.equals(lastName, StringUtils.capitalize(lastName))){
             throw new BadRequestException("Неверный формат запроса");
         }
         return employeeService.removeEmployee(firstName, lastName);
@@ -47,7 +47,7 @@ public class EmployeeController {
 
     @GetMapping(path = "/find")
     public Employee findEmployee(@RequestParam("firstName") String firstName, @RequestParam("lastName") String lastName) throws BadRequestException {
-        if (!Objects.equals(firstName, StringUtils.capitalize(firstName)) && !Objects.equals(lastName, StringUtils.capitalize(lastName))){
+        if (!Objects.equals(firstName, StringUtils.capitalize(firstName)) || !Objects.equals(lastName, StringUtils.capitalize(lastName))){
             throw new BadRequestException("Неверный формат запроса");
         }
         return employeeService.getEmployee(firstName,lastName);

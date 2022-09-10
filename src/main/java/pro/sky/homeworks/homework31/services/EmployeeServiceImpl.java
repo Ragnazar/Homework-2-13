@@ -1,6 +1,7 @@
 package pro.sky.homeworks.homework31.services;
 
 import org.springframework.stereotype.Service;
+import pro.sky.homeworks.homework31.exceptions.EmployeeAlreadyAddedException;
 import pro.sky.homeworks.homework31.exceptions.EmployeeNotFoundException;
 import pro.sky.homeworks.homework31.Employee;
 
@@ -49,6 +50,9 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public Employee addEmployee(String firstName, String lastName, int departmentId, double salary) {
         String key = firstName + lastName;
+        if (employees.containsKey(key)) {
+            throw new EmployeeAlreadyAddedException("Запись уже существует");
+        }
         Employee employee = new Employee(firstName, lastName, departmentId, salary);
         employees.put(key, employee);
         return employee;
