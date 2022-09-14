@@ -1,13 +1,13 @@
-package pro.sky.homeworks.homework31.controllers;
+package pro.sky.homeworks.homework213.controllers;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import pro.sky.homeworks.homework31.Employee;
-import pro.sky.homeworks.homework31.exceptions.BadRequestException;
-import pro.sky.homeworks.homework31.services.DepartmentService;
-import pro.sky.homeworks.homework31.services.EmployeeService;
+import pro.sky.homeworks.homework213.Employee;
+import pro.sky.homeworks.homework213.exceptions.BadRequestException;
+import pro.sky.homeworks.homework213.services.DepartmentService;
+import pro.sky.homeworks.homework213.services.EmployeeService;
 
 
 import java.util.List;
