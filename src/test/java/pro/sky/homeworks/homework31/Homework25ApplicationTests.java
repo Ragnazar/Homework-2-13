@@ -1,4 +1,4 @@
-package pro.sky.homeworks.homework27;
+package pro.sky.homeworks.homework31;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

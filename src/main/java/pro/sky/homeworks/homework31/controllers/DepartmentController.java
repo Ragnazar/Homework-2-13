@@ -1,11 +1,11 @@
-package pro.sky.homeworks.homework28.controllers;
+package pro.sky.homeworks.homework31.controllers;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import pro.sky.homeworks.homework28.Employee;
-import pro.sky.homeworks.homework28.services.DepartmentService;
+import pro.sky.homeworks.homework31.Employee;
+import pro.sky.homeworks.homework31.services.DepartmentService;
 
 
 import java.util.Collection;
@@ -23,12 +23,12 @@ public class DepartmentController {
     }
 
     @GetMapping(path = "/max-salary")
-    public Employee addEmployee(@RequestParam("departmentId") int departmentId) {
+    public Employee haveMaxSalaryInDept(@RequestParam("departmentId") int departmentId) {
         return departmentService.haveMaxSalaryInDept(departmentId);
     }
 
     @GetMapping(path = "/min-salary")
-    public Employee removeEmployee(@RequestParam("departmentId") int departmentId) {
+    public Employee haveMinSalaryInDept(@RequestParam("departmentId") int departmentId) {
         return departmentService.haveMinSalaryInDept(departmentId);
     }
 
@@ -38,7 +38,7 @@ public class DepartmentController {
     }
 
     @GetMapping(path = "/all")
-    public Collection<Employee> findEmployee(@RequestParam("departmentId") int departmentId) {
+    public Collection<Employee> findEmployee(@RequestParam(value = "departmentId", required = false) int departmentId) {
         return departmentService.getAllByDept(departmentId);
     }
 }
