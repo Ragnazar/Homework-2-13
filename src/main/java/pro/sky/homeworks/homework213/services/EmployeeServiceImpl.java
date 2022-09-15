@@ -59,7 +59,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     private String getKey(Employee employee) {
-        return employee.getLastName() + " " + employee.getFirstName();
+        return employee.getFirstName() + " " + employee.getLastName();
     }
 
 
