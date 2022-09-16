@@ -21,7 +21,7 @@ public class DepartmentServiceImpl implements DepartmentService {
     public Employee haveMaxSalaryInDept(int departmentId) {
         return employeeService.getMap().values().stream()
                 .filter(employee -> employee.getDepartment() == departmentId)
-                .max(Comparator.comparingDouble(Employee::getSalary)).orElseThrow();
+                .max(Comparator.comparingDouble(Employee::getSalary)).orElseThrow(IllegalStateException::new);
     }
 
 

@@ -1,11 +1,11 @@
 package pro.sky.homeworks.homework213.services;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import pro.sky.homeworks.homework213.Employee;
+import pro.sky.homeworks.homework213.exceptions.DeptNotFoundException;
 
 
 import java.util.ArrayList;
@@ -24,14 +24,9 @@ class DepartmentServiceImplTest {
     private final Employee employee = new Employee(FIRSTNAME, LASTNAME, ONE, TWO);
     @Mock
     private EmployeeServiceImpl employeeServiceMock;
-
+    @Mock
     private DepartmentService out;
 
-
-    @BeforeEach
-    public void setUp() {
-        out = new DepartmentServiceImpl(employeeServiceMock);
-    }
 
     @Test
     void shouldGetEmployeeWithMaxSalaryInDept() {
@@ -42,10 +37,9 @@ class DepartmentServiceImplTest {
 
     @Test
     void shouldThrowNotFoundExceptionWhenGetEmployeeWithMaxSalaryInDept() {
-        when(out.haveMaxSalaryInDept(TWO)).thenThrow(ClassNotFoundException.class);
+        when(out.haveMaxSalaryInDept(TWO)).thenThrow(DeptNotFoundException.class);
         Throwable thrown = catchThrowable(() -> out.haveMaxSalaryInDept(TWO));
-        assertThat(thrown).isInstanceOf(ClassNotFoundException.class);
-        assertThat(thrown.getMessage()).isNotBlank();
+        assertThat(thrown).isInstanceOf(DeptNotFoundException.class);
     }
 
     @Test
@@ -56,10 +50,9 @@ class DepartmentServiceImplTest {
 
     @Test
     void shouldThrowNotFoundExceptionWhenGetEmployeeWithMinSalaryInDept() {
-        when(out.haveMinSalaryInDept(TWO)).thenThrow(ClassNotFoundException.class);
+        when(out.haveMinSalaryInDept(TWO)).thenThrow(DeptNotFoundException.class);
         Throwable thrown = catchThrowable(() -> out.haveMinSalaryInDept(TWO));
-        assertThat(thrown).isInstanceOf(ClassNotFoundException.class);
-        assertThat(thrown.getMessage()).isNotBlank();
+        assertThat(thrown).isInstanceOf(DeptNotFoundException.class);
     }
 
 
@@ -72,10 +65,9 @@ class DepartmentServiceImplTest {
 
     @Test
     void shouldThrowNotFoundExceptionWhenGetAllEmployeesInDept() {
-        when(out.getAllByDept(TWO)).thenThrow(ClassNotFoundException.class);
+        when(out.getAllByDept(TWO)).thenThrow(DeptNotFoundException.class);
         Throwable thrown = catchThrowable(() -> out.getAllByDept(TWO));
-        assertThat(thrown).isInstanceOf(ClassNotFoundException.class);
-        assertThat(thrown.getMessage()).isNotBlank();
+        assertThat(thrown).isInstanceOf(DeptNotFoundException.class);
     }
 
     @Test
